@@ -21,5 +21,10 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 
+    App\Modules\Subscriber\Service\SubscriberFactory: '@App\Modules\Subscriber\Service\SimpleSubscriberFactory'
+    App\Modules\Subscriber\Service\SubscriberEvents: '@App\Modules\Subscriber\Service\SubscriberEventsSimpleFinder'
+    App\Modules\Placeholders\Repository\PlaceholderRepository: '@App\Modules\Placeholders\Repository\ArrayPlaceholderRepository'
+    App\Modules\Calendar\Service\iCalendarGenerator: '@App\Modules\Calendar\Service\SpatieGenerator'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

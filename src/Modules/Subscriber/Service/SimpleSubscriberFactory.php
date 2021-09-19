@@ -10,6 +10,8 @@ use App\Repository\SubscriberRepository;
 
 class SimpleSubscriberFactory implements SubscriberFactory
 {
+    const DEFAULT_SEGMENT_NAME =  'default';
+
     private SubscriberRepository $repository;
     private SegmentRepository $segmentRepository;
 
@@ -24,7 +26,12 @@ class SimpleSubscriberFactory implements SubscriberFactory
         $newSubscriber = new Subscriber();
         $this->repository->add($newSubscriber);
 
-        $defaultSegment = $this->segmentRepository->findOneBy(['name' => 'default']);
+        $defaultSegment = $this->segmentRepository->findOneBy(['name' => self::DEFAULT_SEGMENT_NAME]);
+
+        if (null === $defaultSegment) {
+            throw new \DomainException('Default segment not found');
+        }
+
         $newSubscriber->addSegment($defaultSegment);
 
         return $newSubscriber;

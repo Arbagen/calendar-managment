@@ -28,7 +28,7 @@ class CreateSegment extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $segments = [
-            new Segment('default'),
+            new Segment(\App\Modules\Subscriber\Service\SimpleSubscriberFactory::DEFAULT_SEGMENT_NAME),
             new Segment('first segment'),
             new Segment('second segment'),
             new Segment('third segment'),
